@@ -4,7 +4,9 @@
   "main": "ac-buywidget.html",
   "dependencies": {
     "polymer": "Polymer/polymer#^1.4.0",
-    "web3": "^0.16.0"
+    "web3": "^0.16.0",
+    "ac-style": "https://github.com/ArcadeCity/ac-style.git",
+    "ac-button": "https://github.com/ArcadeCity/ac-button.git"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
