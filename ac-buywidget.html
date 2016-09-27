@@ -1,0 +1,49 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<!--
+`ac-buywidget`
+Buy widget for your favorite tokensale
+
+@demo demo/index.html 
+-->
+
+<dom-module id="ac-buywidget">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h2>Buy ARC Tokens</h2>
+    <p>Smart contract address : 0x3cEb298C394CcfCCF3b5752260695DAbe497Ce3f</p>
+    <h3>Buy using VISA ( via Coinbase )</h3>
+    <p><img src="https://blog.coinbase.com/content/images/2016/06/buy_widget.png" width="300"/></p>
+    <p>You can purchase up to 50USD. If you want to purchase more - you need a Coinbase account.</p>
+    <h3>Buy using MetaMask</h3>
+    <p><img src="https://d13yacurqjgara.cloudfront.net/users/75026/screenshots/2160434/twitter-backdrop_03.png" width="300"/></p>
+    <h3>Buy using Mist</h3>
+    <p>Smart contract QR code<br/><img src="https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=0x687422eea2cb73b5d3e242ba5456b782919afc85"></p>
+
+    <h2>Verify your ARC token balance</h2>
+    <p>Your account <input type="text" name="account"/>
+      <input type="submit" value="Verify"/></p>
+
+
+
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'ac-buywidget',
+
+      properties: {
+        prop1: {
+          type: String,
+          value: 'ac-buywidget',
+        },
+      },
+
+    });
+  </script>
+</dom-module>
