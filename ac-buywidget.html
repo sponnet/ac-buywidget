@@ -1,5 +1,6 @@
 <link rel="import" href="../polymer/polymer.html">
-
+<link rel="import" href="../ac-style/ac-style.html">
+<script src="../web3/dist/web3.min.js"></script>
 <!--
 `ac-buywidget`
 Buy widget for your favorite tokensale
@@ -15,7 +16,7 @@ Buy widget for your favorite tokensale
       }
     </style>
     <h2>Buy ARC Tokens</h2>
-    <p>Smart contract address : 0x3cEb298C394CcfCCF3b5752260695DAbe497Ce3f</p>
+    <p>Smart contract address : {{contractaddress}}</p>
     <h3>Buy using VISA ( via Coinbase )</h3>
     <p><img src="https://blog.coinbase.com/content/images/2016/06/buy_widget.png" width="300"/></p>
     <p>You can purchase up to 50USD. If you want to purchase more - you need a Coinbase account.</p>
@@ -26,9 +27,9 @@ Buy widget for your favorite tokensale
 
     <h2>Verify your ARC token balance</h2>
     <p>Your account <input type="text" name="account"/>
-      <input type="submit" value="Verify"/></p>
-
-
+      <input type="submit" on-tap="checkBalance" value="Verify"/></p>
+      <p>Your balance is {{balance}} {{tokensymbol}}</p>
+      <p>Current block: {{blocknumber}}</p>
 
   </template>
 
@@ -38,11 +39,68 @@ Buy widget for your favorite tokensale
       is: 'ac-buywidget',
 
       properties: {
-        prop1: {
-          type: String,
-          value: 'ac-buywidget',
+        contractaddress: {
+          type: String          
         },
+        contractabi: {
+          type: Object
+        },
+        contractbytecode: {
+          type : String
+        },
+        rpchost: {
+          type: String,
+          value: 'http://localhost:8545'
+        },
+        tokensymbol: {
+          type: String
+        },
+        blocknumber: {
+          type: String
+        },
+        balance: {
+          type: Number
+        }
+
       },
+
+      attached: function() {
+        var Web3 = require('web3');
+       
+        this.web3 = new Web3(new Web3.providers.HttpProvider(this.rpchost));
+
+        this.setupListener(this.getBalance);
+
+      },
+
+      getBalance: function(err,blocknumber){
+        this.balance = blocknumber;
+
+        //contractaddress
+      },
+
+      setupListener: function(callback) {
+
+        this.blocknumber = this.web3.eth.blockNumber;
+
+        var filter = this.web3.eth.filter('latest').watch(function(err, blockHash) {
+
+          this.blocknumber = this.web3.eth.blockNumber; 
+          if (callback){
+            callback(null,this.blocknumber);
+          }
+
+        }.bind(this));
+        
+      },
+
+
+      checkBalance: function() {
+        if (!web3){
+          return;
+        }
+        targetcontract
+      }
 
     });
   </script>
